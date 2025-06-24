@@ -1,5 +1,6 @@
 # Recursively copy the objectives to the new player name one by one
-$scoreboard players set $(Player) $(Objective) $(Value)
+# (Note): I check if the objective is in the list in case it gets removed from it. In this case, I don't want to copy it over to the player anymore.
+$execute if data storage score_fixer:objectives List[{Name:"$(Objective)"}] run scoreboard players set $(Player) $(Objective) $(Value)
 
 # Next objective
 execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 1 run return 0
