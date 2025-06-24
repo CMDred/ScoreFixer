@@ -4,8 +4,6 @@ scoreboard players add #ScoreFixer.OnlinePlayerCount ScoreFixer 1
 
 # Get Player UUID
 data modify storage score_fixer:zprivate Player.UUID set from entity @s UUID
-#data modify storage score_fixer:zprivate Player.UUID set value [I;1,2,3,4]
-
 
 # Get Player Name
 # (Note): I didn't use a hardcoded UUID to make absolutely sure there won't be a UUID collision, which would mess up the pack.
