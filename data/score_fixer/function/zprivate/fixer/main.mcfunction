@@ -4,6 +4,8 @@ scoreboard players add #ScoreFixer.OnlinePlayerCount ScoreFixer 1
 
 # Get Player UUID
 data modify storage score_fixer:zprivate Player.UUID set from entity @s UUID
+#data modify storage score_fixer:zprivate Player.UUID set value [I;1,2,3,4]
+
 
 # Get Player Name
 # (Note): I didn't use a hardcoded UUID to make absolutely sure there won't be a UUID collision, which would mess up the pack.
@@ -17,7 +19,8 @@ function score_fixer:zprivate/fixer/get_map_by_name with storage score_fixer:zpr
 execute store success score #ScoreFixer.MapExists ScoreFixer if data storage score_fixer:zprivate Temp.CurrentMap
 
     # If yes: Check if the UUID is different
-    execute if score #ScoreFixer.MapExists ScoreFixer matches 1 store success score #ScoreFixer.IsDifferentUUID ScoreFixer run data modify storage score_fixer:zprivate Temp.CurrentMap.UUID set from storage score_fixer:zprivate Player.UUID
+    execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run data modify storage score_fixer:zprivate Temp.EqualityCheck set from storage score_fixer:zprivate Temp.CurrentMap.UUID
+    execute if score #ScoreFixer.MapExists ScoreFixer matches 1 store success score #ScoreFixer.IsDifferentUUID ScoreFixer run data modify storage score_fixer:zprivate Temp.EqualityCheck set from storage score_fixer:zprivate Player.UUID
 
         # If no: Stop the function (Player joined with their usual name)
         execute if score #ScoreFixer.MapExists ScoreFixer matches 1 if score #ScoreFixer.IsDifferentUUID ScoreFixer matches 0 run return 0
@@ -42,4 +45,4 @@ execute store success score #ScoreFixer.MapExists ScoreFixer if data storage sco
         execute unless data storage score_fixer:zprivate Temp.CurrentBackup run return 0
 
         # If yes: Load the backup and delete it
-        function score_fixer:zprivate/fixer/load_backup
+        function score_fixer:zprivate/fixer/load_backup with storage score_fixer:zprivate Player

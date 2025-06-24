@@ -10,3 +10,6 @@ $data modify storage score_fixer:zprivate Backups append value {UUID:$(UUID),Dat
 
 # Reset the other player's scores
 $scoreboard players reset $(Name)
+
+# Remove the other player's map
+$data remove storage score_fixer:zprivate Maps[{Name:$(Name)}]

@@ -1,7 +1,7 @@
 # Recursively copy the objectives and values to the backup one by one
 $execute store success score #ScoreFixer.HasScoreValue ScoreFixer if score $(Player) $(Name) matches ..2147483647
-$execute data modify storage score_fixer:zprivate Backups[-1].Data append value {Objective:"$(Name)"}
-$execute store result storage score_fixer:zprivate Backups[-1].Data[-1].Value run scoreboard players get $(Player) $(Name)
+$data modify storage score_fixer:zprivate Backups[-1].Data append value {Objective:$(Name)}
+$execute store result storage score_fixer:zprivate Backups[-1].Data[-1].Value int 1 run scoreboard players get $(Player) $(Name)
 execute if score #ScoreFixer.HasScoreValue ScoreFixer matches 0 run data remove storage score_fixer:zprivate Backups[-1].Data[-1]
 
 # Next objective
