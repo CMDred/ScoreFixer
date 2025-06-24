@@ -8,6 +8,9 @@ $data modify storage score_fixer:zprivate Backups append value {UUID:$(UUID),Dat
     data modify storage score_fixer:zprivate Temp.Objectives[-1].Player set from storage score_fixer:zprivate Temp.CurrentMap.Name
     function score_fixer:zprivate/fixer/create_backup_2 with storage score_fixer:zprivate Temp.Objectives[-1]
 
+# Delete the backup again if it's empty
+execute unless data storage score_fixer:zprivate Backups[-1].Data[0] run data remove storage score_fixer:zprivate Backups[-1]
+
 # Reset the other player's scores
 $scoreboard players reset $(Name)
 
