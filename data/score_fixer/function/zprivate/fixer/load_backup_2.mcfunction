@@ -1,5 +1,4 @@
 # Recursively copy the objectives to the new player name one by one
-data remove storage score_fixer:zprivate Temp.Objectives[-1]
 $scoreboard players set $(Player) $(Objective) $(Value)
 
 # Next objective

@@ -30,7 +30,10 @@ execute store success score #ScoreFixer.MapExists ScoreFixer if data storage sco
     execute store success score #ScoreFixer.MapExists ScoreFixer if data storage score_fixer:zprivate Temp.CurrentMap
 
         # If yes: Copy scores from the old name to the new name & update the map
-        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run return run say "Copy scores from the old name to the new name, reset the old name's scores and update the mapping's name"
+        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run data modify storage score_fixer:zprivate Player.OldName set from storage score_fixer:zprivate Temp.CurrentMap.Name
+        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run return run function score_fixer:zprivate/fixer/transfer_scores with storage score_fixer:zprivate Player
+
+        #execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run return run say "Copy scores from the old name to the new name, reset the old name's scores and update the mapping's name"
 
         # If no: Create a map & check if a backup with that UUID exists
         data modify storage score_fixer:zprivate Maps append from storage score_fixer:zprivate Player
