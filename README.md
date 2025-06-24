@@ -6,7 +6,7 @@ Download: [Modrinth](https://modrinth.com/datapack/score-fixer)\
 Issue tracker: [GitHub](https://github.com/CMDred/ScoreFixer)
 
 ## Why is this necessary?
-In Minecraft, scoreboards are an insecure place to store data. Scores are tied to usernames rather than UUIDs. As such, changing your name resets your previously held scores (which can break Data Packs or lose progress), and anyone joining with your old name now holds your previous scores.\
+In Minecraft, scores are tied to usernames rather than UUIDs. As such, changing your name resets your previously held scores (which can break Data Packs or lose progress), and anyone joining with your old name can take over your previous scores.\
 **ScoreFixer** tackles this issue and lets you automatically transfer scores to your new name without conflicts.
 
 ## How to use
