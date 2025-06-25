@@ -1,6 +1,5 @@
 # Keep track of number of online players
-scoreboard players set @s ScoreFixer.IsOnline 1
-scoreboard players add #ScoreFixer.OnlinePlayerCount ScoreFixer 1
+execute store success score @s ScoreFixer.IsOnline run scoreboard players add #ScoreFixer.OnlinePlayerCount ScoreFixer 1
 
 # Get Player UUID
 data modify storage score_fixer:zprivate Player.UUID set from entity @s UUID
@@ -20,11 +19,11 @@ execute store success score #ScoreFixer.MapExists ScoreFixer if data storage sco
     execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run data modify storage score_fixer:zprivate Temp.EqualityCheck set from storage score_fixer:zprivate Temp.CurrentMap.UUID
     execute if score #ScoreFixer.MapExists ScoreFixer matches 1 store success score #ScoreFixer.IsDifferentUUID ScoreFixer run data modify storage score_fixer:zprivate Temp.EqualityCheck set from storage score_fixer:zprivate Player.UUID
 
-        # If no: Stop the function (Player joined with their usual name)
-        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 if score #ScoreFixer.IsDifferentUUID ScoreFixer matches 0 run return 0
+        # If no: Stop the function & Remove the map's "IsOffline:1b" (Player joined with their usual name)
+        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 if score #ScoreFixer.IsDifferentUUID ScoreFixer matches 0 run return run function score_fixer:zprivate/fixer/remove_offline_status with storage score_fixer:zprivate Player
 
         # If yes: Update the map for this player's UUID and create a backup for the other player's scores (Player joined with a new name that is already mapped)
-        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 if score #ScoreFixer.IsDifferentUUID ScoreFixer matches 1 run function score_fixer:zprivate/fixer/create_backup with storage score_fixer:zprivate Temp.CurrentMap
+        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run function score_fixer:zprivate/fixer/create_backup with storage score_fixer:zprivate Temp.CurrentMap
 
 # Check if a map with the UUID exists
 function score_fixer:zprivate/fixer/get_map_by_uuid with storage score_fixer:zprivate Player
@@ -39,8 +38,5 @@ execute store success score #ScoreFixer.MapExists ScoreFixer if data storage sco
 
     function score_fixer:zprivate/fixer/get_backup with storage score_fixer:zprivate Player
 
-        # If no: Stop the function
-        execute unless data storage score_fixer:zprivate Temp.CurrentBackup run return 0
-
         # If yes: Load the backup and delete it
-        function score_fixer:zprivate/fixer/load_backup with storage score_fixer:zprivate Player
+        execute if data storage score_fixer:zprivate Temp.CurrentBackup run function score_fixer:zprivate/fixer/load_backup with storage score_fixer:zprivate Player

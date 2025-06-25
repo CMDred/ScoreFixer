@@ -9,6 +9,7 @@ execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 1.. run function 
 # Reset the old player name's scores
 $scoreboard players reset $(OldName)
 
-# Update the map's name
-$data modify storage score_fixer:zprivate Maps[{UUID:$(UUID)}].Name set value $(Name)
-
+# Update the map (Name & Remove "IsOffline:1b")
+data modify storage score_fixer:zprivate Temp.CurrentMap.Name set from storage score_fixer:zprivate Player.Name
+data remove storage score_fixer:zprivate Temp.CurrentMap.IsOffline
+$data modify storage score_fixer:zprivate Maps[{Name:$(OldName)}] set from storage score_fixer:zprivate Temp.CurrentMap

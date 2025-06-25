@@ -1,5 +1,5 @@
 # Recursively copy the objectives to the new player name one by one
-$scoreboard players operation $(Name) $(Objective) = $(OldName) $(Objective)
+$scoreboard players operation @s $(Objective) = $(OldName) $(Objective)
 
 # Next objective
 execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 1 run return 0
