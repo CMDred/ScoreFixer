@@ -16,8 +16,8 @@ scoreboard players reset #ScoreFixer.Init
 scoreboard players reset #ScoreFixer.ShowLoadMessage
 scoreboard players reset #ScoreFixer.PlayerCount
 scoreboard players reset #ScoreFixer.OnlinePlayerCount
-scoreboard players reset #ScoreFixer.HasScoreValue
-scoreboard players reset #ScoreFixer.ObjectiveCount
+scoreboard players reset #ScoreFixer.HasValue
+scoreboard players reset #ScoreFixer.EntryCount
 scoreboard players reset #ScoreFixer.MapExists
 scoreboard players reset #ScoreFixer.IsDifferentUUID
 
@@ -25,6 +25,7 @@ data remove storage score_fixer:objectives List
 data remove storage score_fixer:zprivate Backups
 data remove storage score_fixer:zprivate Maps
 data remove storage score_fixer:zprivate Player
+data remove storage score_fixer:zprivate OnlinePlayers
 data remove storage score_fixer:zprivate Temp
 
 # Stop the tick function

@@ -7,6 +7,7 @@ scoreboard objectives add ScoreFixer.IsOnline dummy
 
 # Data Storages
 data modify storage score_fixer:objectives List set value []
+data modify storage score_fixer:zprivate OnlinePlayers set value []
 
 # Tellraw
 tellraw @a ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Installed ScoreFixer (v1.0.0)"]
