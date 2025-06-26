@@ -12,6 +12,11 @@ tag @s remove ScoreFixer.ThisPlayer
 execute store success score @s ScoreFixer.IsOnline run scoreboard players add #ScoreFixer.OnlinePlayerCount ScoreFixer 1
 data modify storage score_fixer:zprivate OnlinePlayers append from storage score_fixer:zprivate Player
 
+# Trigger the "#score_fixer:joined_game" event
+data modify storage score_fixer:event Data set from storage score_fixer:zprivate Player
+function #score_fixer:joined_game with storage score_fixer:event Data
+data remove storage score_fixer:event Data
+
 # Check if a map for the current name already exists
 function score_fixer:zprivate/fixer/get_map_by_name with storage score_fixer:zprivate Player
 execute store success score #ScoreFixer.MapExists ScoreFixer if data storage score_fixer:zprivate Temp.CurrentMap
@@ -35,4 +40,4 @@ execute store success score #ScoreFixer.MapExists ScoreFixer if data storage sco
 
     # If yes: Update the map & copy scores from it to the new name
     data modify storage score_fixer:zprivate Player.OldName set from storage score_fixer:zprivate Temp.CurrentMap.Name
-    function score_fixer:zprivate/fixer/transfer_scores with storage score_fixer:zprivate Player
+    function score_fixer:zprivate/fixer/changed_name with storage score_fixer:zprivate Player

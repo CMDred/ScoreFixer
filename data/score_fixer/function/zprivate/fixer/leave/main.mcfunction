@@ -14,3 +14,9 @@ data modify storage score_fixer:zprivate Temp.CurrentMap.IsOffline set value 1b
     execute if score #ScoreFixer.EntryCount ScoreFixer matches 1.. run function score_fixer:zprivate/fixer/leave/copy_scores with storage score_fixer:zprivate Temp.Objectives[-1]
 
 $data modify storage score_fixer:zprivate Maps[{Name:$(Name)}] set from storage score_fixer:zprivate Temp.CurrentMap
+
+# Trigger the "#score_fixer:left_game" event
+data modify storage score_fixer:event Data.Name set from storage score_fixer:zprivate Temp.CurrentMap.Name
+data modify storage score_fixer:event Data.UUID set from storage score_fixer:zprivate Temp.CurrentMap.UUID
+function #score_fixer:left_game with storage score_fixer:event Data
+data remove storage score_fixer:event Data

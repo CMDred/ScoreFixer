@@ -6,4 +6,4 @@ $execute if data storage score_fixer:objectives List[{Name:$(Name)}] run scorebo
 execute if score #ScoreFixer.EntryCount ScoreFixer matches 1 run return 0
 scoreboard players remove #ScoreFixer.EntryCount ScoreFixer 1
 data remove storage score_fixer:zprivate Temp.Objectives[-1]
-function score_fixer:zprivate/fixer/transfer_scores_2 with storage score_fixer:zprivate Temp.Objectives[-1]
+function score_fixer:zprivate/fixer/changed_name_2 with storage score_fixer:zprivate Temp.Objectives[-1]
