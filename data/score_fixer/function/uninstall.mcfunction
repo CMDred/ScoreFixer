@@ -7,6 +7,10 @@ scoreboard objectives remove ScoreFixer.Uninstall
 
 # Tellraw
 tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Uninstalled ScoreFixer (v1.0.0)"]
+tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Also remove all associated data? ",{text:"[Yes]",bold:true,color:"red",click_event:{action:"run_command",command:"/function score_fixer:zprivate/true_uninstall"},hover_event:{action:"show_text",value:["",{text:"WARNING:",color:"dark_red"}," Scores only get transferred to the new name once the player joins. Any scores that have not yet been applied will be lost forever.\n\n",{text:"Click to remove all data!",color:"yellow"}]}}]
+
+# Set ScoreFixer version in data storage (For potential datafixing when installing a newer version)
+data modify storage score_fixer:zprivate Version set value 1
 
 # Remove scoreboards & data storages
 scoreboard objectives remove ScoreFixer
@@ -23,12 +27,10 @@ scoreboard players reset #ScoreFixer.IsDifferentUUID
 scoreboard players reset #ScoreFixer.WasModified
 scoreboard players reset #ScoreFixer.IsHexadecimal
 
-data remove storage score_fixer:objectives List
-data remove storage score_fixer:zprivate Backups
-data remove storage score_fixer:zprivate Maps
 data remove storage score_fixer:zprivate Player
 data remove storage score_fixer:zprivate OnlinePlayers
 data remove storage score_fixer:zprivate Temp
+data remove storage score_fixer:loaded Players
 
 # Stop the tick function
 schedule clear score_fixer:zprivate/tick
