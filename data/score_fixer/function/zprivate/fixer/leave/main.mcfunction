@@ -11,7 +11,7 @@ data modify storage score_fixer:zprivate Temp.CurrentMap.IsOffline set value 1b
     data modify storage score_fixer:zprivate Temp.Objectives set from storage score_fixer:objectives List
     data modify storage score_fixer:zprivate Temp.Objectives[-1].Player set from storage score_fixer:zprivate Temp.CurrentMap.Name
     data modify storage score_fixer:zprivate Temp.CurrentMap.Objectives set value []
-    execute if score #ScoreFixer.EntryCount ScoreFixer matches 1.. run function score_fixer:zprivate/fixer/leave/copy_scores with storage score_fixer:zprivate Temp.Objectives[-1]
+    execute if score #ScoreFixer.EntryCount ScoreFixer matches 1.. run function score_fixer:zprivate/fixer/leave/store_scores with storage score_fixer:zprivate Temp.Objectives[-1]
 
 $data modify storage score_fixer:zprivate Maps[{Name:$(Name)}] set from storage score_fixer:zprivate Temp.CurrentMap
 

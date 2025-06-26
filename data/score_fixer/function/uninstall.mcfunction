@@ -20,6 +20,7 @@ scoreboard players reset #ScoreFixer.HasValue
 scoreboard players reset #ScoreFixer.EntryCount
 scoreboard players reset #ScoreFixer.MapExists
 scoreboard players reset #ScoreFixer.IsDifferentUUID
+scoreboard players reset #ScoreFixer.WasModified
 
 data remove storage score_fixer:objectives List
 data remove storage score_fixer:zprivate Backups

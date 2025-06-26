@@ -10,4 +10,4 @@ execute if score #ScoreFixer.EntryCount ScoreFixer matches 1 run return 0
 scoreboard players remove #ScoreFixer.EntryCount ScoreFixer 1
 data remove storage score_fixer:zprivate Temp.Objectives[-1]
 data modify storage score_fixer:zprivate Temp.Objectives[-1].Player set from storage score_fixer:zprivate Temp.CurrentMap.Name
-function score_fixer:zprivate/fixer/leave/copy_scores with storage score_fixer:zprivate Temp.Objectives[-1]
+function score_fixer:zprivate/fixer/leave/store_scores with storage score_fixer:zprivate Temp.Objectives[-1]

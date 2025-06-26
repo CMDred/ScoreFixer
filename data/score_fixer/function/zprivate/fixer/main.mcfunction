@@ -25,8 +25,8 @@ execute store success score #ScoreFixer.MapExists ScoreFixer if data storage sco
     execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run data modify storage score_fixer:zprivate Temp.EqualityCheck set from storage score_fixer:zprivate Temp.CurrentMap.UUID
     execute if score #ScoreFixer.MapExists ScoreFixer matches 1 store success score #ScoreFixer.IsDifferentUUID ScoreFixer run data modify storage score_fixer:zprivate Temp.EqualityCheck set from storage score_fixer:zprivate Player.UUID
 
-        # If no: Stop the function & remove the map's "IsOffline:1b" (Player joined with their usual name)
-        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 if score #ScoreFixer.IsDifferentUUID ScoreFixer matches 0 run return run function score_fixer:zprivate/fixer/remove_offline_status with storage score_fixer:zprivate Player
+        # If no: Stop the function, remove the map's "IsOffline:1b" and apply any score changes that happened to the data storage while the player was offline (Player joined with their usual name)
+        execute if score #ScoreFixer.MapExists ScoreFixer matches 1 if score #ScoreFixer.IsDifferentUUID ScoreFixer matches 0 run return run function score_fixer:zprivate/fixer/no_name_change with storage score_fixer:zprivate Player
 
         # If yes: Remove the other player's map's name, reset their score and update the map for this player's UUID (Player joined with a new name that is already mapped)
         execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run function score_fixer:zprivate/fixer/name_conflict with storage score_fixer:zprivate Temp.CurrentMap
