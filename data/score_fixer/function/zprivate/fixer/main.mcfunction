@@ -39,5 +39,10 @@ execute store success score #ScoreFixer.MapExists ScoreFixer if data storage sco
     execute if score #ScoreFixer.MapExists ScoreFixer matches 0 run return run data modify storage score_fixer:zprivate Maps append from storage score_fixer:zprivate Player
 
     # If yes: Update the map & copy scores from it to the new name
+    # (Note): Different functions depending on whether the Name is stored in the data.
+    execute store success score #ScoreFixer.NameExists ScoreFixer if data storage score_fixer:zprivate Temp.CurrentMap.Name
+    execute if score #ScoreFixer.NameExists ScoreFixer matches 0 run return run function score_fixer:zprivate/fixer/changed_name_alt with storage score_fixer:zprivate Player
+
     data modify storage score_fixer:zprivate Player.OldName set from storage score_fixer:zprivate Temp.CurrentMap.Name
     function score_fixer:zprivate/fixer/changed_name with storage score_fixer:zprivate Player
+    data remove storage score_fixer:zprivate Player.OldName

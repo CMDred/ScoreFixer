@@ -26,6 +26,7 @@ scoreboard players reset #ScoreFixer.MapExists
 scoreboard players reset #ScoreFixer.IsDifferentUUID
 scoreboard players reset #ScoreFixer.WasModified
 scoreboard players reset #ScoreFixer.IsHexadecimal
+scoreboard players reset #ScoreFixer.NameExists
 
 data remove storage score_fixer:zprivate Player
 data remove storage score_fixer:zprivate OnlinePlayers
