@@ -2,9 +2,6 @@
 scoreboard players set #ScoreFixer.Init ScoreFixer 1
 execute unless score #ScoreFixer.ShowLoadMessage ScoreFixer matches 0 run scoreboard players set #ScoreFixer.ShowLoadMessage ScoreFixer 1
 
-# Scoreboards
-scoreboard objectives add ScoreFixer.IsOnline dummy
-
 # Data Storages
 execute unless data storage score_fixer:objectives List run data modify storage score_fixer:objectives List set value []
 execute unless data storage score_fixer:zprivate Maps run data modify storage score_fixer:zprivate Maps set value []

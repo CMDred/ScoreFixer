@@ -9,7 +9,7 @@ execute summon minecraft:item_display run function score_fixer:zprivate/fixer/ge
 tag @s remove ScoreFixer.ThisPlayer
 
 # Keep track of online players
-execute store success score @s ScoreFixer.IsOnline run scoreboard players add #ScoreFixer.OnlinePlayerCount ScoreFixer 1
+execute store success score @s ScoreFixer run scoreboard players add #ScoreFixer.OnlinePlayerCount ScoreFixer 1
 data modify storage score_fixer:zprivate OnlinePlayers append from storage score_fixer:zprivate Player
 
 # Trigger the "#score_fixer:joined_game" event

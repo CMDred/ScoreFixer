@@ -16,7 +16,6 @@ data modify storage score_fixer:zprivate Maps[].IsOffline set value 1b
 
 # Remove scoreboards & data storages
 scoreboard objectives remove ScoreFixer
-scoreboard objectives remove ScoreFixer.IsOnline
 
 scoreboard players reset #ScoreFixer.Init
 scoreboard players reset #ScoreFixer.ShowLoadMessage
