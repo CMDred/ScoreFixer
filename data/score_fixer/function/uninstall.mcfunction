@@ -12,6 +12,8 @@ tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Also remove all ass
 # Set ScoreFixer version in data storage (For potential datafixing when installing a newer version)
 data modify storage score_fixer:zprivate Version set value 1
 
+data modify storage score_fixer:zprivate Maps[].IsOffline set value 1b
+
 # Remove scoreboards & data storages
 scoreboard objectives remove ScoreFixer
 scoreboard objectives remove ScoreFixer.IsOnline
