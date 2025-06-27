@@ -40,8 +40,9 @@ After applying changes to the objectives in `score_fixer:loaded Players`, run `/
   - Reason: Names in commands are case insensitive if a player with that name is online. If a player exclusively changes their name's capitalization, scores cannot be copied over when they join.
 
 ## Credit
-From CMDred:
 - **SilicatYT**
+
+Additional help: Leinad677YT (Consulting & ideas)
 
 ## License
 As per the MIT License, you are allowed to redistribute, modify and use **ScoreFixer** as long as you provide credit for the original work.
