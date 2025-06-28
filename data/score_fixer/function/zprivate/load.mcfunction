@@ -1,6 +1,13 @@
-# Lantern Load
-scoreboard players set #ScoreFixer load.status 1
-scoreboard players set #ScoreFixer.Version load.status 1
+# Error checking
+    # Version check: Check if ScoreFixer is installed twice with conflicting versions
+    function #score_fixer:zprivate/version_check
+    execute if score #ScoreFixer.VersionError load.status matches 1 run tellraw @a [{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},{text:"⚠ Multiple incompatible versions of ScoreFixer detected. Remove all but one and try again.",color:"red"}]
+    execute if score #ScoreFixer.VersionError load.status matches 1 run schedule clear score_fixer:zprivate/tick
+    execute if score #ScoreFixer.VersionError load.status matches 1 run return run scoreboard players reset #ScoreFixer.VersionError
+
+    # Lantern Load
+    # (Note): If the version check fails, load.status will not be set, and therefore it won't start ticking.
+    scoreboard players set #ScoreFixer load.status 1
 
 # Init
 scoreboard objectives add ScoreFixer dummy
