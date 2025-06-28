@@ -1,3 +1,7 @@
+# Lantern Load
+scoreboard players set #ScoreFixer load.status 1
+scoreboard players set #ScoreFixer.Version load.status 1
+
 # Init
 scoreboard objectives add ScoreFixer dummy
 execute unless score #ScoreFixer.Init ScoreFixer matches 1 run function score_fixer:zprivate/init
