@@ -34,8 +34,7 @@ After applying changes to the objectives in `score_fixer:loaded Players`, run `/
 - `#score_fixer:left_game`: When a player leaves, this function tag is executed. The data storage `score_fixer:event Data` contains `Name` and `UUID`.
 
 ## Good to know
-- **ScoreFixer** supports [Lantern Load](https://github.com/LanternMC/load) to control the order in which Data Packs load
-  - It is recommended for **ScoreFixer** to run first, so that scores are transferred before other Data Packs try to use them
+- It is recommended for **ScoreFixer** to run first, so that scores are transferred before other Data Packs try to use them
 - For technical reasons, scores manually set while the player was offline (e.g. `scoreboard players set SilicatYT foo 1`) cannot be transferred if they join with a new name; use the `load` and `save` utilities instead
   - Reason: Names in commands are case insensitive if a player with that name is online. If a player exclusively changes their name's capitalization, scores cannot be copied over when they join.
 
