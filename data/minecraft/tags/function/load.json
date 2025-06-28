@@ -1,5 +1,5 @@
 {
   "values": [
-    "score_fixer:zprivate/load"
+    "#load:_private/load"
   ]
 }
