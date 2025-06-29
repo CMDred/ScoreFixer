@@ -1,3 +1,6 @@
+# Version error checking
+execute if score #ScoreFixer.VersionError load.status matches 1 run return run function score_fixer:zprivate/version_error
+
 # Check if it's installed
 scoreboard objectives add ScoreFixer.Uninstall dummy
 execute if score #ScoreFixer.Init ScoreFixer matches 1 run scoreboard players set #ScoreFixer.Init ScoreFixer.Uninstall 1
@@ -10,7 +13,7 @@ tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Uninstalled ScoreFi
 tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Also remove all associated data? ",{text:"[Yes]",bold:true,color:"red",click_event:{action:"run_command",command:"/function score_fixer:zprivate/true_uninstall"},hover_event:{action:"show_text",value:["",{text:"WARNING:",color:"dark_red"}," Scores only get transferred to the new name once the player joins. Any scores that have not yet been applied will be lost forever.\n\n",{text:"Click to remove all data!",color:"yellow"}]}}]
 
 # Set ScoreFixer version in data storage (For potential datafixing when installing a newer version)
-data modify storage score_fixer:zprivate Version set value 1
+execute store result storage score_fixer:zprivate Version int 1 run scoreboard players get #ScoreFixer.Version load.status
 
 data modify storage score_fixer:zprivate Maps[].IsOffline set value 1b
 

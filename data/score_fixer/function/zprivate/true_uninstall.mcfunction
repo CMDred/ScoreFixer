@@ -1,3 +1,6 @@
+# Version error checking
+execute if score #ScoreFixer.VersionError load.status matches 1 run return run function score_fixer:zprivate/version_error
+
 # Check if it's installed
 scoreboard objectives add ScoreFixer.Uninstall dummy
 execute if score #ScoreFixer.Init ScoreFixer matches 1 run scoreboard players set #ScoreFixer.Init ScoreFixer.Uninstall 1
