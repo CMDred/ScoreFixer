@@ -6,7 +6,7 @@ execute unless score #ScoreFixer.Init ScoreFixer.Uninstall matches 1 run return 
 scoreboard objectives remove ScoreFixer.Uninstall
 
 # Tellraw
-tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Uninstalled ScoreFixer (v1.0.0)"]
+tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Uninstalled ScoreFixer (v1.0.1)"]
 tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Also remove all associated data? ",{text:"[Yes]",bold:true,color:"red",click_event:{action:"run_command",command:"/function score_fixer:zprivate/true_uninstall"},hover_event:{action:"show_text",value:["",{text:"WARNING:",color:"dark_red"}," Scores only get transferred to the new name once the player joins. Any scores that have not yet been applied will be lost forever.\n\n",{text:"Click to remove all data!",color:"yellow"}]}}]
 
 # Set ScoreFixer version in data storage (For potential datafixing when installing a newer version)

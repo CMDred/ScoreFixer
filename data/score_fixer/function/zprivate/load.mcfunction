@@ -1,8 +1,10 @@
 # Error checking
+# (Note): The version increments when the data structure changes (incl. getting new data that doesn't break datapacks using the old version), behaviour changes or functions are added/removed.
     # Version check: Check if ScoreFixer is installed twice with conflicting versions
-    function #score_fixer:zprivate/version_check
+    execute if function #score_fixer:zprivate/version_check run scoreboard players set #ScoreFixer.VersionError load.status 1
     execute if score #ScoreFixer.VersionError load.status matches 1 run tellraw @a [{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},{text:"⚠ Multiple incompatible versions of ScoreFixer detected. Remove all but one and try again.",color:"red"}]
     execute if score #ScoreFixer.VersionError load.status matches 1 run schedule clear score_fixer:zprivate/tick
+    execute if score #ScoreFixer.VersionError load.status matches 1 run scoreboard players reset #ScoreFixer.Version
     execute if score #ScoreFixer.VersionError load.status matches 1 run return run scoreboard players reset #ScoreFixer.VersionError
 
     # Lantern Load
