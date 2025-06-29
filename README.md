@@ -35,7 +35,7 @@ After applying changes to the objectives in `score_fixer:loaded Players`, run `/
 
 ## Good to know
 - [Lantern Load](https://github.com/LanternMC/load) support: If you follow the conventions (ScoreFixer must load before your pack), you can **check whether ScoreFixer is installed** (& what version) by checking the `#ScoreFixer load.status` & `#ScoreFixer.Version load.status` scores respectively.
-  - If ScoreFixer is **installed multiple times with a different `#ScoreFixer.Version`**, it will throw errors and not set the Lantern Load scores.
+  - If ScoreFixer is **installed multiple times with a different `#ScoreFixer.Version`**, it will throw errors and not set the Lantern Load scores (Only works for versions **1.1.0 and above**).
 - To ensure that scores are transferred before your data pack notices, make ScoreFixer tick before your pack does by **making ScoreFixer load first** and **running a self-scheduled `tick` function in `load`** instead of using `#minecraft:tick`.
 - For technical reasons, scores manually set while the player was offline (e.g. `scoreboard players set SilicatYT foo 1`) cannot be transferred if they join with a new name; use the `load` and `save` utilities instead
   - Reason: Names in commands are case insensitive if a player with that name is online. If a player exclusively changes their name's capitalization, scores cannot be copied over when they join.
