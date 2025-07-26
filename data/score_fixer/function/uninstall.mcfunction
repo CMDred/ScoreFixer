@@ -17,6 +17,10 @@ execute store result storage score_fixer:zprivate Version int 1 run scoreboard p
 
 data modify storage score_fixer:zprivate Maps[].IsOffline set value 1b
 
+# Lantern Load & Version Checking
+scoreboard players reset #ScoreFixer load.status
+scoreboard players reset #ScoreFixer.Version load.status
+
 # Remove scoreboards & data storages
 scoreboard objectives remove ScoreFixer
 
