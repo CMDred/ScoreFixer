@@ -3,7 +3,7 @@
 $scoreboard players reset @s $(Name)
 
 # Next objective
-execute if score #ScoreFixer.EntryCount ScoreFixer matches 1 run return 0
-scoreboard players remove #ScoreFixer.EntryCount ScoreFixer 1
+execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 1 run return 0
+scoreboard players remove #ScoreFixer.ObjectiveCount ScoreFixer 1
 data remove storage score_fixer:zprivate Temp.Objectives[-1]
 function score_fixer:zprivate/fixer/reset_scores with storage score_fixer:zprivate Temp.Objectives[-1]

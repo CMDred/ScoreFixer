@@ -21,7 +21,7 @@ To make ScoreFixer automatically transfer an objective (e.g. "foo"), add `{Name:
 ### Access offline players' scores
 #### Load
 You can access offline players' scores with their UUID by running `/function score_fixer:util/load_with_uuid {UUID:...}` (accepts hexadecimal and int array format). If a player is found, their data is copied to `score_fixer:loaded Players`. From there, you can make changes (adjust score values, remove objectives from the list to reset them, etc).\
-Alternatively, you can manually copy data from every player that matches your custom condition like so: 
+Alternatively, you can manually copy data from every player that matches your custom condition like so:
 ```
 /data modify storage score_fixer:loaded Players append from storage score_fixer:zprivate Maps[{Objectives:[{Name:"foo",Value:10}]}]
 ```
@@ -32,6 +32,11 @@ After applying changes to the objectives in `score_fixer:loaded Players`, run `/
 - `#score_fixer:changed_name`: When a player joins with a new name, this function tag is executed **as** that player. The data storage `score_fixer:event Data` contains `Name`, `OldName` and `UUID`.
 - `#score_fixer:joined_game`: When a player joins, this function tag is executed **as** that player. The data storage `score_fixer:event Data` contains `Name` and `UUID`.
 - `#score_fixer:left_game`: When a player leaves, this function tag is executed. The data storage `score_fixer:event Data` contains `Name` and `UUID`.
+
+### Upgrade or uninstall ScoreFixer
+- **Upgrade:** Replace the Data Pack with the new version and `/reload`.
+  - If you want to downgrade, you'll have to uninstall ScoreFixer first (Make sure NOT to delete the associated data).
+- **Uninstall:** Run `/function score_fixer:uninstall`.
 
 ## Good to know
 - [Lantern Load](https://github.com/LanternMC/load) support: If you follow the conventions (ScoreFixer must load before your pack), you can **check whether ScoreFixer is installed** (& what version) by checking the `#ScoreFixer load.status` & `#ScoreFixer.Version load.status` scores respectively.

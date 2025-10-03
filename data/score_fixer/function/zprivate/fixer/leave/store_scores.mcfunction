@@ -6,8 +6,8 @@ $execute store result storage score_fixer:zprivate Temp.CurrentMap.Objectives[-1
 execute if score #ScoreFixer.HasValue ScoreFixer matches 0 run data remove storage score_fixer:zprivate Temp.CurrentMap.Objectives[-1]
 
 # Next objective
-execute if score #ScoreFixer.EntryCount ScoreFixer matches 1 run return 0
-scoreboard players remove #ScoreFixer.EntryCount ScoreFixer 1
+execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 1 run return 0
+scoreboard players remove #ScoreFixer.ObjectiveCount ScoreFixer 1
 data remove storage score_fixer:zprivate Temp.Objectives[-1]
 data modify storage score_fixer:zprivate Temp.Objectives[-1].Player set from storage score_fixer:zprivate Temp.CurrentMap.Name
 function score_fixer:zprivate/fixer/leave/store_scores with storage score_fixer:zprivate Temp.Objectives[-1]

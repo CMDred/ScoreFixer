@@ -8,8 +8,8 @@ execute if score #ScoreFixer.WasModified ScoreFixer matches 0 run return 0
 
 # Reset all scores from the objectives list
     # Get the number of tracked objectives
-    execute store result score #ScoreFixer.EntryCount ScoreFixer if data storage score_fixer:objectives List[]
-    execute if score #ScoreFixer.EntryCount ScoreFixer matches 0 run return 0
+    execute store result score #ScoreFixer.ObjectiveCount ScoreFixer if data storage score_fixer:objectives List[]
+    execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 0 run return 0
 
     # Copy each objective to the new player name
     data modify storage score_fixer:zprivate Temp.Objectives set from storage score_fixer:objectives List
@@ -17,8 +17,8 @@ execute if score #ScoreFixer.WasModified ScoreFixer matches 0 run return 0
 
 # Copy scores
     # Get the number of tracked objectives
-    execute store result score #ScoreFixer.EntryCount ScoreFixer if data storage score_fixer:zprivate Temp.CurrentMap.Objectives[]
-    execute if score #ScoreFixer.EntryCount ScoreFixer matches 0 run return 0
+    execute store result score #ScoreFixer.ObjectiveCount ScoreFixer if data storage score_fixer:zprivate Temp.CurrentMap.Objectives[]
+    execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 0 run return 0
 
     # Copy each objective to the new player name
     data modify storage score_fixer:zprivate Temp.Objectives set from storage score_fixer:zprivate Temp.CurrentMap.Objectives

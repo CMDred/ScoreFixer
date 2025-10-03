@@ -1,5 +1,5 @@
 # Version error checking
-# (Note): The version increments when the data structure changes, previous behaviour changes or new utilities are added.
+# (Note): The version increments when the data structure changes, previous behaviour changes or new utilities are added. Or when replacing the old datapack with a new one would leave dangling scoreboards, data etc.
     # Version check: Check if ScoreFixer is installed twice with conflicting versions
     execute if function #score_fixer:zprivate/version_check run return run function score_fixer:zprivate/version_error
     scoreboard players reset #ScoreFixer.VersionError
