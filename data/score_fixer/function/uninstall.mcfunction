@@ -1,5 +1,5 @@
 # Version error checking
-execute if score #ScoreFixer.VersionError load.status matches 1 run return run function score_fixer:zprivate/version_error
+execute if score #ScoreFixer load.status matches -1 run return run function score_fixer:zprivate/error/version_mismatch
 
 # Check if it's installed
 scoreboard objectives add ScoreFixer.Uninstall dummy
@@ -9,21 +9,20 @@ execute unless score #ScoreFixer.Init ScoreFixer.Uninstall matches 1 run return 
 scoreboard objectives remove ScoreFixer.Uninstall
 
 # Tellraw
-tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Uninstalled ScoreFixer (v1.1.1)"]
+tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Uninstalled ScoreFixer (v1.2.0)"]
 tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Also remove all associated data? ",{text:"[Yes]",bold:true,color:"red",click_event:{action:"run_command",command:"/function score_fixer:zprivate/true_uninstall"},hover_event:{action:"show_text",value:["",{text:"WARNING:",color:"dark_red"}," Scores only get transferred to the new name once the player joins. Any scores that have not yet been applied will be lost forever.\n\n",{text:"Click to remove all data!",color:"yellow"}]}}]
 
-# Set ScoreFixer version in data storage (For potential datafixing when installing a newer version)
-execute store result storage score_fixer:zprivate Version int 1 run scoreboard players get #ScoreFixer.Version load.status
-
-data modify storage score_fixer:zprivate Maps[].IsOffline set value 1b
+# Mark players as offline
+tag @a add ScoreFixer.Joined
+function score_fixer:zprivate/fixer/leave/main
+tag @a remove ScoreFixer.Joined
 
 # Lantern Load & Version Checking
 scoreboard players reset #ScoreFixer load.status
 scoreboard players reset #ScoreFixer.Version load.status
 
-# Remove scoreboards & data storages
+# Remove non-vital scoreboards & data storages
 scoreboard objectives remove ScoreFixer
-scoreboard objectives remove ScoreFixer.LeaveGame
 
 scoreboard players reset #ScoreFixer.Init
 scoreboard players reset #ScoreFixer.ShowLoadMessage

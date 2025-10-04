@@ -2,7 +2,7 @@
 execute if score #ScoreFixer.VersionError load.status matches 1 run return run function score_fixer:zprivate/version_error
 
 # Check if ScoreFixer is installed
-execute unless score #ScoreFixer load.status matches 1.. run return run function score_fixer:zprivate/not_installed_error
+execute unless score #ScoreFixer load.status matches 1.. run return run function score_fixer:zprivate/error/not_installed
 
 # Save all the loaded player storages (for offline players)
 # (Note): If a player is offline, the data is not applied as scores anyway, and the storage gets overwritten when they leave. However, I need to make sure the "IsModified:1b" data is not set if the player is online.

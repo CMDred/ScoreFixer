@@ -1,15 +1,19 @@
-# Version error checking
+# Version error checking: Check if ScoreFixer is installed twice with conflicting versions
 # (Note): The version increments when the data structure changes, previous behaviour changes or new utilities are added. Or when replacing the old datapack with a new one would leave dangling scoreboards, data etc.
-    # Version check: Check if ScoreFixer is installed twice with conflicting versions
-    execute if function #score_fixer:zprivate/version_check run return run function score_fixer:zprivate/version_error
-    scoreboard players reset #ScoreFixer.VersionError
+# (Note): If the version check fails, load.status will be negative with the respective error code (e.g. -1: version mismatch), and therefore it won't start ticking.
+execute if function #score_fixer:zprivate/version_check run return run function score_fixer:zprivate/error/version_mismatch
 
-    # Lantern Load
-    # (Note): If the version check fails, load.status will not be set, and therefore it won't start ticking.
-    scoreboard players set #ScoreFixer load.status 1
+# Automatic upgrade
+# (Note): It tries to automatically uninstall the previous version and install the new version without manual input. But if the previous version is higher, it throws an error.
+execute if score #ScoreFixer.Init ScoreFixer matches 1 store result score #ScoreFixer.PreviousVersion load.status run data get storage score_fixer:zprivate Version
+execute if score #ScoreFixer.PreviousVersion load.status matches 0 run return run function score_fixer:zprivate/error/version_unknown
+execute if score #ScoreFixer.PreviousVersion load.status > #ScoreFixer.Version load.status run return run function score_fixer:zprivate/error/version_downgrade
+execute if score #ScoreFixer.PreviousVersion load.status < #ScoreFixer.Version load.status run function score_fixer:zprivate/upgrade/main
+
+scoreboard players set #ScoreFixer load.status 1
 
 # Init
-scoreboard objectives add ScoreFixer dummy
+scoreboard objectives add ScoreFixer minecraft.custom:minecraft.leave_game
 execute unless score #ScoreFixer.Init ScoreFixer matches 1 run function score_fixer:zprivate/init
 
 # Tellraw
