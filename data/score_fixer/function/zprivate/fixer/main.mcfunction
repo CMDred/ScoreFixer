@@ -1,3 +1,5 @@
+tag @s remove ScoreFixer.Joined
+
 # Get Player UUID
 data modify storage score_fixer:zprivate Player.UUID set from entity @s UUID
 
@@ -9,7 +11,6 @@ execute summon minecraft:item_display run function score_fixer:zprivate/fixer/ge
 tag @s remove ScoreFixer.ThisPlayer
 
 # Keep track of online players
-execute store success score @s ScoreFixer run scoreboard players add #ScoreFixer.OnlinePlayerCount ScoreFixer 1
 data modify storage score_fixer:zprivate OnlinePlayers append from storage score_fixer:zprivate Player
 
 # Trigger the "#score_fixer:joined_game" event
@@ -28,7 +29,7 @@ execute store success score #ScoreFixer.MapExists ScoreFixer if data storage sco
         # If no: Stop the function, remove the map's "IsOffline:1b" and apply any score changes that happened to the data storage while the player was offline (Player joined with their usual name)
         execute if score #ScoreFixer.MapExists ScoreFixer matches 1 if score #ScoreFixer.IsDifferentUUID ScoreFixer matches 0 run return run function score_fixer:zprivate/fixer/no_name_change with storage score_fixer:zprivate Player
 
-        # If yes: Remove the other player's map's name, reset their score and update the map for this player's UUID (Player joined with a new name that is already mapped)
+        # If yes: Remove the other player's map's name, reset their scores and update the map for this player's UUID (Player joined with a new name that is already mapped)
         execute if score #ScoreFixer.MapExists ScoreFixer matches 1 run function score_fixer:zprivate/fixer/name_conflict with storage score_fixer:zprivate Temp.CurrentMap
 
 # Check if a map with the UUID exists

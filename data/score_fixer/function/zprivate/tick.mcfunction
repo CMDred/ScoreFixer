@@ -2,27 +2,16 @@
 schedule function score_fixer:zprivate/tick 1t
 
 # Detect joining the game
-execute as @a unless score @s ScoreFixer matches 1 run function score_fixer:zprivate/fixer/main
+# (Note): Two phases so it detects people who regularly joined, and people who renamed to something else (incl. someone else's name from this server). The new method is necessary because 1.21.9+ doesn't tick before at least one player is online in Singleplayer, which breaks the 1.1.0 method.
+# (Note): I first mark people as joined, then run leave detection, then run the join_game event (So the join event doesn't run before the leave event if both are detected in the same tick because of Singleplayer).
+execute as @a[scores={ScoreFixer.LeaveGame=1..}] run function score_fixer:zprivate/fixer/mark_as_joined
+execute as @a unless score @s ScoreFixer matches 1 run function score_fixer:zprivate/fixer/mark_as_joined
 execute store result score #ScoreFixer.PlayerCount ScoreFixer if entity @a
 
 # Check if someone left
-execute if score #ScoreFixer.OnlinePlayerCount ScoreFixer = #ScoreFixer.PlayerCount ScoreFixer run return 0
+execute unless score #ScoreFixer.OnlinePlayerCount ScoreFixer = #ScoreFixer.PlayerCount ScoreFixer run function score_fixer:zprivate/fixer/leave/main
 
-    # Iterate over OnlinePlayers and run appropriate "leave" commands for everyone who left
-    data modify storage score_fixer:zprivate Temp.Players set from storage score_fixer:zprivate OnlinePlayers
-    scoreboard players operation #ScoreFixer.EntryCount ScoreFixer = #ScoreFixer.OnlinePlayerCount ScoreFixer
-    scoreboard players operation #ScoreFixer.EntryCount ScoreFixer -= #ScoreFixer.PlayerCount ScoreFixer
-    function score_fixer:zprivate/fixer/leave/find_offline_players with storage score_fixer:zprivate Temp.Players[-1]
-
-    # Reset the players' ScoreFixer score (stands for "IsOnline") and update OnlinePlayerCount
-    # (Note): Because there is only one scoreboard objective, I copy the important fakeplayers' scores to another, then copy them back.
-    scoreboard objectives add ScoreFixer.Temp dummy
-    scoreboard players operation #ScoreFixer.ShowLoadMessage ScoreFixer.Temp = #ScoreFixer.ShowLoadMessage ScoreFixer
-
-    scoreboard players reset * ScoreFixer
-
-    scoreboard players set #ScoreFixer.Init ScoreFixer 1
-    scoreboard players operation #ScoreFixer.ShowLoadMessage ScoreFixer = #ScoreFixer.ShowLoadMessage ScoreFixer.Temp
-    scoreboard objectives remove ScoreFixer.Temp
-
-    execute store success score @a ScoreFixer store result score #ScoreFixer.OnlinePlayerCount ScoreFixer if entity @a
+# Perform the join_game event
+execute unless score #ScoreFixer.SomeoneJoined ScoreFixer matches 1 run return 0
+execute as @a[tag=ScoreFixer.Joined] run function score_fixer:zprivate/fixer/main
+scoreboard players set #ScoreFixer.SomeoneJoined ScoreFixer 0

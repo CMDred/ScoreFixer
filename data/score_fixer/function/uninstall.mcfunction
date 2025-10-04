@@ -23,6 +23,7 @@ scoreboard players reset #ScoreFixer.Version load.status
 
 # Remove scoreboards & data storages
 scoreboard objectives remove ScoreFixer
+scoreboard objectives remove ScoreFixer.LeaveGame
 
 scoreboard players reset #ScoreFixer.Init
 scoreboard players reset #ScoreFixer.ShowLoadMessage
@@ -36,6 +37,8 @@ scoreboard players reset #ScoreFixer.IsDifferentUUID
 scoreboard players reset #ScoreFixer.WasModified
 scoreboard players reset #ScoreFixer.IsHexadecimal
 scoreboard players reset #ScoreFixer.NameExists
+scoreboard players reset #ScoreFixer.SomeoneJoined
+scoreboard players reset #ScoreFixer.IsOnline
 
 data remove storage score_fixer:zprivate Player
 data remove storage score_fixer:zprivate OnlinePlayers
