@@ -33,6 +33,8 @@ After applying changes to the objectives in `score_fixer:loaded Players`, run `/
 - `#score_fixer:joined_game`: When a player joins, this function tag is executed **as** that player. The data storage `score_fixer:event Data` contains `Name` and `UUID`.
 - `#score_fixer:left_game`: When a player leaves, this function tag is executed. The data storage `score_fixer:event Data` contains `Name` and `UUID`.
 
+The data inside `score_fixer:event Data` is also directly accessible using **macros**.
+
 ### Upgrade or uninstall ScoreFixer
 - **Upgrade:** Replace the Data Pack with the new version and `/reload`.
   - If you want to downgrade, you'll have to uninstall ScoreFixer first (Make sure NOT to delete the associated data).
