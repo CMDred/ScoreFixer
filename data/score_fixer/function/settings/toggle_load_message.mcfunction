@@ -1,8 +1,5 @@
-# Version error checking
-execute if score #ScoreFixer.VersionError load.status matches 1 run return run function score_fixer:zprivate/version_error
-
-# Check if ScoreFixer is installed
-execute unless score #ScoreFixer load.status matches 1.. run return run function score_fixer:zprivate/error/not_installed
+# Check if ScoreFixer is running properly
+execute unless score #ScoreFixer load.status matches 1.. run return run function score_fixer:zprivate/error/check
 
 # Toggle the load message
 scoreboard players add #ScoreFixer.ShowLoadMessage ScoreFixer 1
