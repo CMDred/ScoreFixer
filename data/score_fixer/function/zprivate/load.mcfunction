@@ -8,7 +8,7 @@ execute if function #score_fixer:zprivate/version_check run return run function 
 execute if score #ScoreFixer.Init ScoreFixer matches 1 store result score #ScoreFixer.PreviousVersion load.status run data get storage score_fixer:zprivate Version
 execute if score #ScoreFixer.PreviousVersion load.status matches 0 run return run function score_fixer:zprivate/error/version_unknown
 execute if score #ScoreFixer.PreviousVersion load.status > #ScoreFixer.Version load.status run return run function score_fixer:zprivate/error/version_downgrade
-execute if score #ScoreFixer.PreviousVersion load.status < #ScoreFixer.Version load.status run function score_fixer:zprivate/upgrade/main
+#execute if score #ScoreFixer.PreviousVersion load.status matches <accepted range> if score #ScoreFixer.PreviousVersion load.status < #ScoreFixer.Version load.status run function score_fixer:zprivate/upgrade/main
 
 scoreboard players set #ScoreFixer load.status 1
 
