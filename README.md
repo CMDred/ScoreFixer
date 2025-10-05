@@ -68,14 +68,25 @@ The data inside `score_fixer:event Data` is also directly accessible using **mac
 
 ## Good to know
 <details>
-<summary>View technical information & caveats</summary>
+<summary>Caveats to ScoreFixer</summary>
 
-- [Lantern Load](https://github.com/LanternMC/load) support: If you follow the conventions (ScoreFixer must load before your pack), you can **check whether ScoreFixer is installed** (& what version) by checking the `#ScoreFixer load.status` & `#ScoreFixer.Version load.status` scores respectively.
-  - If ScoreFixer is **installed multiple times with a different `#ScoreFixer.Version`**, it will throw errors and not set the Lantern Load scores (Only works for versions **1.1.0 and above**).
-  - If ScoreFixer throws an error, it sets `#ScoreFixer load.status` to a negative value with the respective error code
-- To ensure that scores are transferred before your data pack notices, make ScoreFixer tick before your pack does by **making ScoreFixer load first** and **running a self-scheduled `tick` function in `load`** instead of using `#minecraft:tick`.
-- For technical reasons, scores manually set while the player was offline (e.g. `scoreboard players set SilicatYT foo 1`) cannot be transferred if they join with a new name; use the `load` and `save` utilities instead
-  - Reason: Names in commands are case insensitive if a player with that name is online. If a player exclusively changes their name's capitalization, scores cannot be copied over when they join.
+- Scores manually set while the player is offline (e.g. `/scoreboard players set SilicatYT foo 1`) cannot be transferred if they join with a new name. Use the `load` and `save` utilities instead.
+  - Reason: While a player is offline, the game becomes case insensitive to that name, making it impossible to copy scores from the previous name to the new name if a player only changed their name capitalization.
+
+</details>
+
+<details>
+<summary>Lantern Load</summary>
+
+ScoreFixer supports [Lantern Load](https://github.com/LanternMC/load), a convention that lets you specify dependencies (incl. versions) and control the order in which Data Packs run. **It is vital that ScoreFixer loads and ticks before your Data Pack**, so that scores can be assigned to the new player names before your Data Pack checks them.
+- **Make ScoreFixer load and tick before your Data Pack:** Specify ScoreFixer as a Lantern Load dependency (makes it load first), and make your `load` function start a self-scheduled `tick` function instead of using `#minecraft:tick`.
+- `#ScoreFixer load.status`: This score is set once ScoreFixer loads. Its value tells you **whether ScoreFixer has loaded already**. Negative values are error codes:
+  - 1: ScoreFixer loaded correctly and can be used
+  - <unset>: ScoreFixer could not load (e.g. not installed)
+  - -1: Multiple incompatible ScoreFixer versions installed
+  - -2: Tried to load a ScoreFixer version while a newer one was previously installed and not manually uninstalled
+  - -3: Tried to load a ScoreFixer version while a different unknown version was previously installed and not manually uninstalled
+- `#ScoreFixer.Version load.status`: This score is set once ScoreFixer loads. Its value tells you **what ScoreFixer version is installed**. It's a single integer that increments whenever a potentially breaking change is made (e.g. behaviour change, utility function renamed etc). If the value does not change (e.g. only optimizations were made), any Data Packs that use ScoreFixer should not require any changes either.
 
 </details>
 
