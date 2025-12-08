@@ -1,5 +1,9 @@
 scoreboard players remove #ScoreFixer.EntryCount ScoreFixer 1
 
+# Reset ScoreFixer score
+# (Note): This is necessary because of the following scenario: Server crashes, A leaves without incrementing the ScoreFixer score (Still 0). Server ticks again without A being online, so the leave event runs for A. When A rejoins, their ScoreFixer score is still 0 (because it only increments when leaving), so no joining is detected. That's why I reset the score, so A's join is detected properly. But if A's join is already detected, the score shouldn't reset (because it would cause a 2nd join event in the next tick).
+$execute unless entity @a[name=$(Name),tag=ScoreFixer.Joined,limit=1] run scoreboard players reset $(Name) ScoreFixer
+
 # Remove player from OnlinePlayers storage, add "IsOffline" data & copy player scores to their data storage
 $data remove storage score_fixer:zprivate OnlinePlayers[{Name:$(Name)}]
 $data modify storage score_fixer:zprivate Temp.CurrentMap set from storage score_fixer:zprivate Maps[{Name:$(Name)}]
