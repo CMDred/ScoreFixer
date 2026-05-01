@@ -1,13 +1,10 @@
 tag @s remove ScoreFixer.Joined
 
-# Get Player UUID
-data modify storage score_fixer:zprivate Player.UUID set from entity @s UUID
-
-# Get Player Name
+# Get Player Name & UUID
 # (Note): I didn't use a hardcoded UUID to make absolutely sure there won't be a UUID collision, which would mess up the pack.
 # (Note): I could use a PlayerID score instead of the name, but someone could accidentally reset everyone's scores, delete scoreboard.dat or remove the objective while keeping the data storage, which would mess up the datapack. The performance difference is negligible.
 tag @s add ScoreFixer.ThisPlayer
-execute summon minecraft:item_display run function score_fixer:zprivate/fixer/join/get_player_name
+execute summon minecraft:item_frame run function score_fixer:zprivate/fixer/join/get_player_name_and_uuid
 tag @s remove ScoreFixer.ThisPlayer
 
 # Keep track of online players
