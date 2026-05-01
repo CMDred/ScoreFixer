@@ -38,6 +38,8 @@ scoreboard players reset #ScoreFixer.IsHexadecimal
 scoreboard players reset #ScoreFixer.NameExists
 scoreboard players reset #ScoreFixer.SomeoneJoined
 scoreboard players reset #ScoreFixer.IsOnline
+scoreboard players reset #ScoreFixer.IsSuccess
+scoreboard players reset #ScoreFixer.RecursionFailed
 
 data remove storage score_fixer:zprivate Player
 data remove storage score_fixer:zprivate OnlinePlayers
