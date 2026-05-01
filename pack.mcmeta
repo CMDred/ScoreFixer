@@ -1,6 +1,6 @@
 {
   "pack": {
-      "pack_format": 80,
+      "pack_format": 71,
       "description": "Library for supporting player name changes for scores, by SilicatYT"
   }
 }
