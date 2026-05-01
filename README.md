@@ -18,7 +18,11 @@ In Minecraft, scores are tied to usernames rather than UUIDs. As such, changing 
 <details>
 <summary>Make scores transfer on name change</summary>
 
-To make ScoreFixer automatically transfer an objective (e.g. "foo"), add `{Name:"foo"}` to the `score_fixer:objectives List` data storage.
+To make ScoreFixer automatically transfer objectives (e.g. "foo" & "bar") on name changes, run `/function score_fixer:util/track_objectives {Objectives:["foo", "bar"]}`.
+
+To untrack objectives again, run `/function score_fixer:util/untrack_objectives {Objectives:["foo", "bar"]}`.
+
+Alternatively, you can directly add or remove `{Name:"foo"}` to/from the `score_fixer:objectives List` data storage.
 
 </details>
 
