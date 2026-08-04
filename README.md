@@ -72,6 +72,21 @@ The data inside `score_fixer:event Data` is also directly accessible using **mac
 
 ## Good to know
 <details>
+<summary>Known bugs (Singleplayer exclusive)</summary>
+
+- When joining a singleplayer world immediately after a crash, it is impossible to detect that any time has passed at all. Therefore, unless a name change happened, join and leave events will not play if no time has passed where the player was offline
+- Under very specific circumstances, scores cannot carry over:
+  - A player (John) is leaves by stopping the server, leaving a singleplayer world or crashing it
+  - John or a different player (Steve) joins the world in singleplayer using John's name but different capitalization
+- Under similar conditions as the previous bug (But it needs to be different players), John's next join will not be detected
+
+The reason for not being able to detect joins of previously online players after a crash is that they will be removed from the server without their `leave_game` score increasing. It is singleplayer exclusive due to it being fixable as long as at least 1 tick passes between a player leaving due to a crash and them rejoining, which is guaranteed on servers.
+
+The reason for not being able to carry over scores when names only differ in their capitalization is that `/scoreboard` commands automatically convert a name's capitalization to a matching online player name's capitalization. This makes it impossible to fetch or set an offline player's score if someone else with the same name (but different capitalization) is online. It is singleplayer exclusive due to it being fixable as long as at least 1 tick passes between a player leaving and a player with the same name but different capitalization joining, which is guaranteed on servers.
+
+</details>
+
+<details>
 <summary>Caveats to ScoreFixer</summary>
 
 - Scores manually set while the player is offline (e.g. `/scoreboard players set SilicatYT foo 1`) cannot be transferred if they join with a new name. Use the `load` and `save` utilities instead.
