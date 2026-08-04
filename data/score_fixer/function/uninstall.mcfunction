@@ -13,9 +13,8 @@ tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Uninstalled ScoreFi
 tellraw @s ["",{text:"🔨 ScoreFixer >> ",color:"#E4B0F7"},"Also remove all associated data? ",{text:"[Yes]",bold:true,color:"red",click_event:{action:"run_command",command:"/function score_fixer:zprivate/true_uninstall"},hover_event:{action:"show_text",value:["",{text:"WARNING:",color:"dark_red"}," Scores only get transferred to the new name once the player joins. Any scores that have not yet been applied will be lost forever.\n\n",{text:"Click to remove all data!",color:"yellow"}]}}]
 
 # Mark players as offline
-tag @a add ScoreFixer.Joined
+scoreboard players set @a ScoreFixer 1
 function score_fixer:zprivate/fixer/leave/main
-tag @a remove ScoreFixer.Joined
 
 # Lantern Load & Version Checking
 scoreboard players reset #ScoreFixer load.status

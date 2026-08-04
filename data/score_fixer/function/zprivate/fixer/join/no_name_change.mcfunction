@@ -11,7 +11,7 @@ execute if score #ScoreFixer.WasModified ScoreFixer matches 0 run return 0
     execute store result score #ScoreFixer.ObjectiveCount ScoreFixer if data storage score_fixer:objectives List[]
     execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 0 run return 0
 
-    # Copy each objective to the new player name
+    # Reset each objective from the player name
     data modify storage score_fixer:zprivate Temp.Objectives set from storage score_fixer:objectives List
     function score_fixer:zprivate/fixer/join/reset_scores with storage score_fixer:zprivate Temp.Objectives[-1]
 
@@ -20,6 +20,6 @@ execute if score #ScoreFixer.WasModified ScoreFixer matches 0 run return 0
     execute store result score #ScoreFixer.ObjectiveCount ScoreFixer if data storage score_fixer:zprivate Temp.CurrentMap.Objectives[]
     execute if score #ScoreFixer.ObjectiveCount ScoreFixer matches 0 run return 0
 
-    # Copy each objective to the new player name
+    # Copy each objective's value to the player name
     data modify storage score_fixer:zprivate Temp.Objectives set from storage score_fixer:zprivate Temp.CurrentMap.Objectives
     function score_fixer:zprivate/fixer/join/copy_scores with storage score_fixer:zprivate Temp.Objectives[-1]

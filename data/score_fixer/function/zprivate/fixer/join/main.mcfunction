@@ -1,4 +1,5 @@
-tag @s remove ScoreFixer.Joined
+# (Note): This needs to be here and no earlier, because ScoreFixer score can be reset in "leave", if leave and join happen in the same tick.
+scoreboard players set @s ScoreFixer 0
 
 # Get Player Name & UUID
 # (Note): I didn't use a hardcoded UUID to make absolutely sure there won't be a UUID collision, which would mess up the pack.
